@@ -1,0 +1,1205 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Capstone\_project\_week2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsection{IBM Data Science Capstone
+Project}\label{ibm-data-science-capstone-project}
+
+    \textbf{In this project we will look for the price range for a new
+restaurant.} We are going to check the \textbf{food venues} in the
+center of the major cities of \textbf{Morocco}. We will use their
+rating, food type and position of the city and within the city to create
+a model that will predict the best price range for your new restaurant
+in this area.
+
+    we first install all needed libraries outside the default packages of
+python (drop the comments)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} !pip install geopy}
+        \PY{c+c1}{\PYZsh{} !pip install folium}
+        \PY{c+c1}{\PYZsh{} !pip install bs4}
+        \PY{c+c1}{\PYZsh{} !pip install sklearn}
+\end{Verbatim}
+
+
+    Let's import some libraries
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}columns}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}rows}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{json}
+        \PY{k+kn}{from} \PY{n+nn}{geopy}\PY{n+nn}{.}\PY{n+nn}{geocoders} \PY{k}{import} \PY{n}{Nominatim}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{io}\PY{n+nn}{.}\PY{n+nn}{json} \PY{k}{import} \PY{n}{json\PYZus{}normalize}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{cm} \PY{k}{as} \PY{n+nn}{cm}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{colors} \PY{k}{as} \PY{n+nn}{colors}
+        \PY{k+kn}{import} \PY{n+nn}{folium}
+        \PY{k+kn}{import} \PY{n+nn}{requests}
+        \PY{k+kn}{from} \PY{n+nn}{bs4} \PY{k}{import} \PY{n}{BeautifulSoup}
+\end{Verbatim}
+
+
+    The table of the major Moroccan cities from wikipedia
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{wiki\PYZus{}url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://en.wikipedia.org/wiki/List\PYZus{}of\PYZus{}cities\PYZus{}in\PYZus{}Morocco}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{html} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{wiki\PYZus{}url}\PY{p}{)}\PY{o}{.}\PY{n}{text}
+        \PY{n}{soup} \PY{o}{=} \PY{n}{BeautifulSoup}\PY{p}{(}\PY{n}{html}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lxml}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{my\PYZus{}table} \PY{o}{=} \PY{n}{soup}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{table}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{class}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wikitable sortable}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    Scrapping the Wikipedia page
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{Rank} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{City} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{Estimate} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{Region} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{my\PYZus{}table}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cells} \PY{o}{=} \PY{n}{row}\PY{o}{.}\PY{n}{find\PYZus{}all}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{td}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cells}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+                \PY{n}{Rank}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cells}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{text} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+                \PY{n}{City}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cells}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{text} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+                \PY{n}{Estimate}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cells}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{text} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+                \PY{n}{Region}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{cells}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{text} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Estimate}\PY{p}{:}
+            \PY{n}{j} \PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{strip}\PY{p}{(}\PY{p}{)}
+            \PY{n}{Estimate}\PY{p}{[}\PY{n}{Estimate}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n}{j}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Estimate}\PY{p}{:}
+            \PY{n}{i} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+            \PY{n}{j} \PY{o}{=} \PY{n}{i}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{,}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{Estimate}\PY{p}{[}\PY{n}{Estimate}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{j}\PY{p}{)}
+\end{Verbatim}
+
+
+    Cleaning and sorting, then choosing only the major cities with more than
+200,000 population
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{Morocco\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Rank}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{City}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Estimate}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Estimate}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}} \PY{p}{:} \PY{n}{Region}\PY{p}{\PYZcb{}}\PY{p}{)}
+        
+        \PY{n}{Morocco\PYZus{}df} \PY{o}{=} \PY{n}{Morocco\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Region}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{Morocco\PYZus{}df} \PY{o}{=} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{n}{Morocco\PYZus{}df}\PY{o}{.}\PY{n}{Estimate} \PY{o}{\PYZgt{}} \PY{l+m+mi}{200000}\PY{p}{]}
+\end{Verbatim}
+
+
+    Getting coordinations
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{Latitude} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{Longitude} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{Morocco\PYZus{}df}\PY{o}{.}\PY{n}{City}\PY{p}{:}
+            \PY{n}{address} \PY{o}{=} \PY{n}{i} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{, Morocco}\PY{l+s+s1}{\PYZsq{}}
+            \PY{n}{geolocator} \PY{o}{=} \PY{n}{Nominatim}\PY{p}{(}\PY{n}{user\PYZus{}agent} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{my\PYZhy{}application}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{location} \PY{o}{=} \PY{n}{geolocator}\PY{o}{.}\PY{n}{geocode}\PY{p}{(}\PY{n}{address}\PY{p}{)}
+            \PY{n}{latitude} \PY{o}{=} \PY{n}{location}\PY{o}{.}\PY{n}{latitude}
+            \PY{n}{longitude} \PY{o}{=} \PY{n}{location}\PY{o}{.}\PY{n}{longitude}
+            \PY{n}{Latitude}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{latitude}\PY{p}{)}
+            \PY{n}{Longitude}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{longitude}\PY{p}{)}
+            
+        \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Latitude}
+        \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{Longitude}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{Morocco\PYZus{}df}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:}           City  Estimate   Latitude  Longitude
+         0   Casablanca   3359818  33.595063  -7.618777
+         1          Fez   1112072  34.034653  -5.016193
+         2      Tangier    947952  35.777103  -5.803792
+         3    Marrakesh    928850  31.625826  -7.989161
+         4         Salé    890403  34.015678  -6.756799
+         5       Meknes    632079  33.897812  -5.531984
+         6        Rabat    577827  34.022405  -6.834543
+         7        Oujda    494252  34.677874  -1.929306
+         8      Kenitra    431282  34.264570  -6.570169
+         9       Agadir    421844  30.421114  -9.583063
+         10     Tetouan    380787  35.574140  -5.365256
+         11      Temara    313510  33.922468  -6.913341
+         12        Safi    308508  32.249755  -8.993940
+         13  Mohammedia    208612  33.692001  -7.392048
+\end{Verbatim}
+            
+    Here we plot a map of Morocco\_df (unfortunatily you cant see it on
+Github, so download the notebook and read it with your local juoyter
+instance)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{map\PYZus{}morocco} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{31.7917}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{7.0849}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{,} \PY{n}{city} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, Morocco}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{city}\PY{p}{)}
+             \PY{n}{label} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Popup}\PY{p}{(}\PY{n}{label}\PY{p}{,} \PY{n}{parse\PYZus{}html} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{folium}\PY{o}{.}\PY{n}{Circle}\PY{p}{(}
+                 \PY{p}{[}\PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{radius} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,}
+                 \PY{n}{popup} \PY{o}{=} \PY{n}{label}\PY{p}{,}
+                 \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{blue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{fill} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}3186cc}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{fill\PYZus{}opacity} \PY{o}{=} \PY{l+m+mf}{0.7}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}morocco}\PY{p}{)}
+         
+         \PY{n}{map\PYZus{}morocco}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} <folium.folium.Map at 0x163b0e28c18>
+\end{Verbatim}
+            
+    With this function we are going to import the 33 food venues closest to
+the center of the city. Unfortunately we cannot put up the maximum
+number possible (50) for limit in foursquare accout premium calls.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{CLIENT\PYZus{}ID} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{PM5S4QXIE2V3AAMPJTXJ2WDDA1X5SYDHNXWEMFRAOK45XKTY}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{CLIENT\PYZus{}SECRET} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{EUQS3K3GPO04OBCAVT55YRRVQCRZHEQX3BEY0GHIEN45N4EX}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{VERSION} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20180605}\PY{l+s+s1}{\PYZsq{}}
+         
+         
+         \PY{k}{def} \PY{n+nf}{getNearbyVenues}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{latitudes}\PY{p}{,} \PY{n}{longitudes}\PY{p}{,} \PY{n}{radius} \PY{o}{=} \PY{l+m+mi}{2000}\PY{p}{,} \PY{n}{LIMIT} \PY{o}{=} \PY{l+m+mi}{33}\PY{p}{)}\PY{p}{:}
+             \PY{n}{venues\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{name}\PY{p}{,} \PY{n}{lat}\PY{p}{,} \PY{n}{lng} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{names}\PY{p}{,} \PY{n}{latitudes}\PY{p}{,} \PY{n}{longitudes}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{name}\PY{p}{)}
+                 \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.foursquare.com/v2/venues/search?categoryId=4d4b7105d754a06374d81259\PYZam{}client\PYZus{}id=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}client\PYZus{}secret=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}v=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}ll=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{,}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}radius=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}limit=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}
+                     \PY{n}{CLIENT\PYZus{}ID}\PY{p}{,} 
+                     \PY{n}{CLIENT\PYZus{}SECRET}\PY{p}{,}
+                     \PY{n}{VERSION}\PY{p}{,} 
+                     \PY{n}{lat}\PY{p}{,} 
+                     \PY{n}{lng}\PY{p}{,} 
+                     \PY{n}{radius}\PY{p}{,} 
+                     \PY{n}{LIMIT}\PY{p}{)}
+                 \PY{n}{results} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{k}{for} \PY{n}{v} \PY{o+ow}{in} \PY{n}{results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{venues}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{p}{:}
+                     \PY{n}{venues\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{name}\PY{p}{,}
+                                          \PY{n}{lat}\PY{p}{,}
+                                          \PY{n}{lng}\PY{p}{,}
+                                          \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{location}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{lng}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} 
+                                          \PY{n}{v}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categories}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n}{nearby\PYZus{}venues} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{item} \PY{k}{for} \PY{n}{venue\PYZus{}list} \PY{o+ow}{in} \PY{n}{venues\PYZus{}list} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{venue\PYZus{}list}\PY{p}{]}\PY{p}{)}
+             \PY{n}{nearby\PYZus{}venues}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{nearby\PYZus{}venues}\PY{p}{)}
+         
+         \PY{n}{Morocco\PYZus{}venues} \PY{o}{=} \PY{n}{getNearbyVenues}\PY{p}{(}\PY{n}{names} \PY{o}{=} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{latitudes} \PY{o}{=} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                          \PY{n}{longitudes} \PY{o}{=} \PY{n}{Morocco\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Casablanca
+Fez
+Tangier
+Marrakesh
+Salé
+Meknes
+Rabat
+Oujda
+Kenitra
+Agadir
+Tetouan
+Temara
+Safi
+Mohammedia
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{Morocco\PYZus{}venues}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} (415, 8)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{Morocco\PYZus{}venues}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:}          City  City Latitude  City Longitude                 Venue  \textbackslash{}
+         0  Casablanca      33.595063       -7.618777        Cafe de france   
+         1  Casablanca      33.595063       -7.618777  La Sqala: Café Maure   
+         2  Casablanca      33.595063       -7.618777           Rick's Café   
+         3  Casablanca      33.595063       -7.618777           Venezia Ice   
+         4  Casablanca      33.595063       -7.618777            McDonald's   
+         
+                            Venue Id  Venue Latitude  Venue Longitude  \textbackslash{}
+         0  4d32cf63c75a6ea843a111ae       33.595726        -7.617697   
+         1  4bcb60e6cc8cd13acb45bfcf       33.602983        -7.619430   
+         2  4c0bd8e43c49d13a7b8107cd       33.605134        -7.620469   
+         3  4d090bdf05216dcbe78e1eb6       33.594510        -7.595633   
+         4  4df7b001b61c12d3be910329       33.585859        -7.634806   
+         
+                  Venue Category  
+         0                  Café  
+         1   Moroccan Restaurant  
+         2                Lounge  
+         3                  Café  
+         4  Fast Food Restaurant  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{CLIENT\PYZus{}ID} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{WFU4QVT5P2VFOGGHWIT1N2IFDKK15VR2LNBUXTH4GJ1JSMBQ}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{CLIENT\PYZus{}SECRET} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E5HD1RAH4PVBJ403KLILAI0BU4MY0ZMRYEBRKR0EIBBZBGVE}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{VERSION} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{20180605}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{k}{def} \PY{n+nf}{PriceandRating} \PY{p}{(}\PY{n}{v\PYZus{}id}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ratings\PYZus{}list}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+             \PY{n}{j}\PY{o}{=}\PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n}{v\PYZus{}id}\PY{p}{:}
+                 \PY{n}{venue\PYZus{}id} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{i}\PY{p}{)}
+                 \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://api.foursquare.com/v2/venues/}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{?client\PYZus{}id=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}client\PYZus{}secret=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZam{}v=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{venue\PYZus{}id}\PY{p}{,} \PY{n}{CLIENT\PYZus{}ID}\PY{p}{,} \PY{n}{CLIENT\PYZus{}SECRET}\PY{p}{,} \PY{n}{VERSION}\PY{p}{)}
+                 \PY{n}{results} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{response}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{ratings\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,}
+                                           \PY{n}{results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{venue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                           \PY{n}{results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{venue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tier}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                 \PY{k}{except}\PY{p}{:}
+                     \PY{n}{ratings\PYZus{}list}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{i}\PY{p}{,}
+                                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rating or Tier not present}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rating or Tier not present}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{j}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+                 
+             \PY{n}{rating\PYZus{}venues} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{item} \PY{k}{for} \PY{n}{ratings\PYZus{}list} \PY{o+ow}{in} \PY{n}{ratings\PYZus{}list} \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{ratings\PYZus{}list}\PY{p}{]}\PY{p}{)}
+             \PY{n}{rating\PYZus{}venues}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                      \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{rating\PYZus{}venues}\PY{p}{,} \PY{n}{j}\PY{p}{)}
+         
+         \PY{n}{Venue\PYZus{}ratings}\PY{p}{,}\PY{n}{error} \PY{o}{=} \PY{n}{PriceandRating}\PY{p}{(}\PY{n}{Morocco\PYZus{}venues}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Venue Id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{error}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+205
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{Venue\PYZus{}ratings}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (415, 3)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{Venue\PYZus{}ratings}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}                    Venue Id Venue Rating Venue Price
+         0  4d32cf63c75a6ea843a111ae          5.6           1
+         1  4bcb60e6cc8cd13acb45bfcf            9           2
+         2  4c0bd8e43c49d13a7b8107cd          8.9           3
+         3  4d090bdf05216dcbe78e1eb6          6.1           1
+         4  4df7b001b61c12d3be910329          5.1           1
+\end{Verbatim}
+            
+    We have got some ratings
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{Venue\PYZus{}ratings}\PY{p}{[}\PY{n}{Venue\PYZus{}ratings}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rating or Tier not present}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} (210, 3)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{Venue\PYZus{}ratings\PYZus{}2} \PY{o}{=} \PY{n}{Venue\PYZus{}ratings}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{Morocco\PYZus{}venues\PYZus{}2} \PY{o}{=} \PY{n}{Morocco\PYZus{}venues}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{n}{Morocco\PYZus{}venues\PYZus{}data} \PY{o}{=} \PY{n}{Morocco\PYZus{}venues\PYZus{}2}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{Venue\PYZus{}ratings\PYZus{}2}\PY{p}{)}
+         \PY{n}{Morocco\PYZus{}venues\PYZus{}data} \PY{o}{=} \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rating or Tier not present}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{Morocco\PYZus{}venues\PYZus{}data} \PY{o}{=} \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} (210, 9)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:}          City  City Latitude  City Longitude                 Venue  \textbackslash{}
+         0  Casablanca      33.595063       -7.618777        Cafe de france   
+         1  Casablanca      33.595063       -7.618777  La Sqala: Café Maure   
+         2  Casablanca      33.595063       -7.618777           Rick's Café   
+         3  Casablanca      33.595063       -7.618777           Venezia Ice   
+         4  Casablanca      33.595063       -7.618777            McDonald's   
+         
+            Venue Latitude  Venue Longitude        Venue Category Venue Rating  \textbackslash{}
+         0       33.595726        -7.617697                  Café          5.6   
+         1       33.602983        -7.619430   Moroccan Restaurant            9   
+         2       33.605134        -7.620469                Lounge          8.9   
+         3       33.594510        -7.595633                  Café          6.1   
+         4       33.585859        -7.634806  Fast Food Restaurant          5.1   
+         
+           Venue Price  
+         0           1  
+         1           2  
+         2           3  
+         3           1  
+         4           1  
+\end{Verbatim}
+            
+    Now we are left with major cities and restaurant, let's plot them first
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{map\PYZus{}venues} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{31.7917}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{7.0849}\PY{p}{]}\PY{p}{,} \PY{n}{zoom\PYZus{}start} \PY{o}{=} \PY{l+m+mi}{6}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{,} \PY{n}{venue}\PY{p}{,} \PY{n}{cat} \PY{o+ow}{in} \PY{n+nb}{zip}\PY{p}{(}\PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,}
+                                         \PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{, }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{venue}\PY{p}{,} \PY{n}{cat}\PY{p}{)}
+             \PY{n}{label} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Popup}\PY{p}{(}\PY{n}{label}\PY{p}{,} \PY{n}{parse\PYZus{}html} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}
+                 \PY{p}{[}\PY{n}{lat}\PY{p}{,} \PY{n}{lng}\PY{p}{]}\PY{p}{,}
+                 \PY{n}{popup} \PY{o}{=} \PY{n}{label}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{map\PYZus{}venues}\PY{p}{)}
+         
+         \PY{n}{map\PYZus{}venues}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <folium.folium.Map at 0x163b0e8fef0>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{Morocco\PYZus{}venues\PYZus{}data\PYZus{}2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{Morocco\PYZus{}venues\PYZus{}data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{Morocco\PYZus{}venues\PYZus{}data\PYZus{}2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:}    City Latitude  City Longitude                 Venue  Venue Latitude  \textbackslash{}
+         0      33.595063       -7.618777        Cafe de france       33.595726   
+         1      33.595063       -7.618777  La Sqala: Café Maure       33.602983   
+         2      33.595063       -7.618777           Rick's Café       33.605134   
+         3      33.595063       -7.618777           Venezia Ice       33.594510   
+         4      33.595063       -7.618777            McDonald's       33.585859   
+         
+            Venue Longitude Venue Rating Venue Price  \textbackslash{}
+         0        -7.617697          5.6           1   
+         1        -7.619430            9           2   
+         2        -7.620469          8.9           3   
+         3        -7.595633          6.1           1   
+         4        -7.634806          5.1           1   
+         
+            Venue Category\_African Restaurant  Venue Category\_Bakery  \textbackslash{}
+         0                                  0                      0   
+         1                                  0                      0   
+         2                                  0                      0   
+         3                                  0                      0   
+         4                                  0                      0   
+         
+            Venue Category\_Bar  Venue Category\_Breakfast Spot  \textbackslash{}
+         0                   0                              0   
+         1                   0                              0   
+         2                   0                              0   
+         3                   0                              0   
+         4                   0                              0   
+         
+            Venue Category\_Burger Joint  Venue Category\_Café  \textbackslash{}
+         0                            0                    1   
+         1                            0                    0   
+         2                            0                    0   
+         3                            0                    1   
+         4                            0                    0   
+         
+            Venue Category\_Cocktail Bar  Venue Category\_Coffee Shop  \textbackslash{}
+         0                            0                           0   
+         1                            0                           0   
+         2                            0                           0   
+         3                            0                           0   
+         4                            0                           0   
+         
+            Venue Category\_Cupcake Shop  Venue Category\_Diner  \textbackslash{}
+         0                            0                     0   
+         1                            0                     0   
+         2                            0                     0   
+         3                            0                     0   
+         4                            0                     0   
+         
+            Venue Category\_Eastern European Restaurant  \textbackslash{}
+         0                                           0   
+         1                                           0   
+         2                                           0   
+         3                                           0   
+         4                                           0   
+         
+            Venue Category\_Falafel Restaurant  Venue Category\_Fast Food Restaurant  \textbackslash{}
+         0                                  0                                    0   
+         1                                  0                                    0   
+         2                                  0                                    0   
+         3                                  0                                    0   
+         4                                  0                                    1   
+         
+            Venue Category\_French Restaurant  Venue Category\_Frozen Yogurt Shop  \textbackslash{}
+         0                                 0                                  0   
+         1                                 0                                  0   
+         2                                 0                                  0   
+         3                                 0                                  0   
+         4                                 0                                  0   
+         
+            Venue Category\_Ice Cream Shop  Venue Category\_Italian Restaurant  \textbackslash{}
+         0                              0                                  0   
+         1                              0                                  0   
+         2                              0                                  0   
+         3                              0                                  0   
+         4                              0                                  0   
+         
+            Venue Category\_Juice Bar  Venue Category\_Lounge  \textbackslash{}
+         0                         0                      0   
+         1                         0                      0   
+         2                         0                      1   
+         3                         0                      0   
+         4                         0                      0   
+         
+            Venue Category\_Mediterranean Restaurant  Venue Category\_Mexican Restaurant  \textbackslash{}
+         0                                        0                                  0   
+         1                                        0                                  0   
+         2                                        0                                  0   
+         3                                        0                                  0   
+         4                                        0                                  0   
+         
+            Venue Category\_Middle Eastern Restaurant  \textbackslash{}
+         0                                         0   
+         1                                         0   
+         2                                         0   
+         3                                         0   
+         4                                         0   
+         
+            Venue Category\_Molecular Gastronomy Restaurant  \textbackslash{}
+         0                                               0   
+         1                                               0   
+         2                                               0   
+         3                                               0   
+         4                                               0   
+         
+            Venue Category\_Moroccan Restaurant  Venue Category\_Pizza Place  \textbackslash{}
+         0                                   0                           0   
+         1                                   1                           0   
+         2                                   0                           0   
+         3                                   0                           0   
+         4                                   0                           0   
+         
+            Venue Category\_Pub  Venue Category\_Restaurant  \textbackslash{}
+         0                   0                          0   
+         1                   0                          0   
+         2                   0                          0   
+         3                   0                          0   
+         4                   0                          0   
+         
+            Venue Category\_Sandwich Place  Venue Category\_Seafood Restaurant  \textbackslash{}
+         0                              0                                  0   
+         1                              0                                  0   
+         2                              0                                  0   
+         3                              0                                  0   
+         4                              0                                  0   
+         
+            Venue Category\_Snack Place  Venue Category\_Spanish Restaurant  \textbackslash{}
+         0                           0                                  0   
+         1                           0                                  0   
+         2                           0                                  0   
+         3                           0                                  0   
+         4                           0                                  0   
+         
+            Venue Category\_Steakhouse  Venue Category\_Tapas Restaurant  \textbackslash{}
+         0                          0                                0   
+         1                          0                                0   
+         2                          0                                0   
+         3                          0                                0   
+         4                          0                                0   
+         
+            Venue Category\_Tea Room  Venue Category\_Wings Joint  City\_Agadir  \textbackslash{}
+         0                        0                           0            0   
+         1                        0                           0            0   
+         2                        0                           0            0   
+         3                        0                           0            0   
+         4                        0                           0            0   
+         
+            City\_Casablanca  City\_Fez  City\_Kenitra  City\_Marrakesh  City\_Meknes  \textbackslash{}
+         0                1         0             0               0            0   
+         1                1         0             0               0            0   
+         2                1         0             0               0            0   
+         3                1         0             0               0            0   
+         4                1         0             0               0            0   
+         
+            City\_Mohammedia  City\_Oujda  City\_Rabat  City\_Tangier  City\_Temara  \textbackslash{}
+         0                0           0           0             0            0   
+         1                0           0           0             0            0   
+         2                0           0           0             0            0   
+         3                0           0           0             0            0   
+         4                0           0           0             0            0   
+         
+            City\_Tetouan  
+         0             0  
+         1             0  
+         2             0  
+         3             0  
+         4             0  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{Venues\PYZus{}dataset\PYZus{}2} \PY{o}{=} \PY{n}{Morocco\PYZus{}venues\PYZus{}data\PYZus{}2}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{City Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name}
+         \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{index}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{k+kc}{None}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venues\PYZus{}Morocco.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:}    Venue Latitude  Venue Longitude Venue Rating Venue Price  \textbackslash{}
+         0       33.595726        -7.617697          5.6           1   
+         1       33.602983        -7.619430            9           2   
+         2       33.605134        -7.620469          8.9           3   
+         3       33.594510        -7.595633          6.1           1   
+         4       33.585859        -7.634806          5.1           1   
+         
+            Venue Category\_African Restaurant  Venue Category\_Bakery  \textbackslash{}
+         0                                  0                      0   
+         1                                  0                      0   
+         2                                  0                      0   
+         3                                  0                      0   
+         4                                  0                      0   
+         
+            Venue Category\_Bar  Venue Category\_Breakfast Spot  \textbackslash{}
+         0                   0                              0   
+         1                   0                              0   
+         2                   0                              0   
+         3                   0                              0   
+         4                   0                              0   
+         
+            Venue Category\_Burger Joint  Venue Category\_Café  \textbackslash{}
+         0                            0                    1   
+         1                            0                    0   
+         2                            0                    0   
+         3                            0                    1   
+         4                            0                    0   
+         
+            Venue Category\_Cocktail Bar  Venue Category\_Coffee Shop  \textbackslash{}
+         0                            0                           0   
+         1                            0                           0   
+         2                            0                           0   
+         3                            0                           0   
+         4                            0                           0   
+         
+            Venue Category\_Cupcake Shop  Venue Category\_Diner  \textbackslash{}
+         0                            0                     0   
+         1                            0                     0   
+         2                            0                     0   
+         3                            0                     0   
+         4                            0                     0   
+         
+            Venue Category\_Eastern European Restaurant  \textbackslash{}
+         0                                           0   
+         1                                           0   
+         2                                           0   
+         3                                           0   
+         4                                           0   
+         
+            Venue Category\_Falafel Restaurant  Venue Category\_Fast Food Restaurant  \textbackslash{}
+         0                                  0                                    0   
+         1                                  0                                    0   
+         2                                  0                                    0   
+         3                                  0                                    0   
+         4                                  0                                    1   
+         
+            Venue Category\_French Restaurant  Venue Category\_Frozen Yogurt Shop  \textbackslash{}
+         0                                 0                                  0   
+         1                                 0                                  0   
+         2                                 0                                  0   
+         3                                 0                                  0   
+         4                                 0                                  0   
+         
+            Venue Category\_Ice Cream Shop  Venue Category\_Italian Restaurant  \textbackslash{}
+         0                              0                                  0   
+         1                              0                                  0   
+         2                              0                                  0   
+         3                              0                                  0   
+         4                              0                                  0   
+         
+            Venue Category\_Juice Bar  Venue Category\_Lounge  \textbackslash{}
+         0                         0                      0   
+         1                         0                      0   
+         2                         0                      1   
+         3                         0                      0   
+         4                         0                      0   
+         
+            Venue Category\_Mediterranean Restaurant  Venue Category\_Mexican Restaurant  \textbackslash{}
+         0                                        0                                  0   
+         1                                        0                                  0   
+         2                                        0                                  0   
+         3                                        0                                  0   
+         4                                        0                                  0   
+         
+            Venue Category\_Middle Eastern Restaurant  \textbackslash{}
+         0                                         0   
+         1                                         0   
+         2                                         0   
+         3                                         0   
+         4                                         0   
+         
+            Venue Category\_Molecular Gastronomy Restaurant  \textbackslash{}
+         0                                               0   
+         1                                               0   
+         2                                               0   
+         3                                               0   
+         4                                               0   
+         
+            Venue Category\_Moroccan Restaurant  Venue Category\_Pizza Place  \textbackslash{}
+         0                                   0                           0   
+         1                                   1                           0   
+         2                                   0                           0   
+         3                                   0                           0   
+         4                                   0                           0   
+         
+            Venue Category\_Pub  Venue Category\_Restaurant  \textbackslash{}
+         0                   0                          0   
+         1                   0                          0   
+         2                   0                          0   
+         3                   0                          0   
+         4                   0                          0   
+         
+            Venue Category\_Sandwich Place  Venue Category\_Seafood Restaurant  \textbackslash{}
+         0                              0                                  0   
+         1                              0                                  0   
+         2                              0                                  0   
+         3                              0                                  0   
+         4                              0                                  0   
+         
+            Venue Category\_Snack Place  Venue Category\_Spanish Restaurant  \textbackslash{}
+         0                           0                                  0   
+         1                           0                                  0   
+         2                           0                                  0   
+         3                           0                                  0   
+         4                           0                                  0   
+         
+            Venue Category\_Steakhouse  Venue Category\_Tapas Restaurant  \textbackslash{}
+         0                          0                                0   
+         1                          0                                0   
+         2                          0                                0   
+         3                          0                                0   
+         4                          0                                0   
+         
+            Venue Category\_Tea Room  Venue Category\_Wings Joint  City\_Agadir  \textbackslash{}
+         0                        0                           0            0   
+         1                        0                           0            0   
+         2                        0                           0            0   
+         3                        0                           0            0   
+         4                        0                           0            0   
+         
+            City\_Casablanca  City\_Fez  City\_Kenitra  City\_Marrakesh  City\_Meknes  \textbackslash{}
+         0                1         0             0               0            0   
+         1                1         0             0               0            0   
+         2                1         0             0               0            0   
+         3                1         0             0               0            0   
+         4                1         0             0               0            0   
+         
+            City\_Mohammedia  City\_Oujda  City\_Rabat  City\_Tangier  City\_Temara  \textbackslash{}
+         0                0           0           0             0            0   
+         1                0           0           0             0            0   
+         2                0           0           0             0            0   
+         3                0           0           0             0            0   
+         4                0           0           0             0            0   
+         
+            City\_Tetouan  
+         0             0  
+         1             0  
+         2             0  
+         3             0  
+         4             0  
+\end{Verbatim}
+            
+    \subsubsection{Analytics Model}\label{analytics-model}
+
+    The machine learning algorithm I used is K nearest Neighbor (KNN), and I
+used 2 evaluation test (Jaccard and MSE)
+
+    I removed the venue latitude and longitude because, in the susequent
+machine learning algorithm they were needlessly adding complexity.
+
+The Lat Long values are surely more useful in a project regarding only
+one city instead this one involving the entire nation. As an exploratory
+analysis I checked the price unique values count and I discovered that
+only 2 are at tier 4 (the most expensive), so I decided to treat that
+data as outliers and I removed them. Moreover, the presence of only two
+values skew the results of the K fold cross validation.
+
+As for the machine Learning algorithms I choose two. KNN and Kfold Cross
+Validation. and I used 2 evaluation test (Jaccard and MSE)
+
+They both are classification algorithms, made for the kind of task
+needed here. The first is of course bound to the randomness of the train
+test split, the Kfold method reduce much of this fitting issue, you can
+see the hyperparameter K dropping from 14 or 11 to 5.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{jaccard\PYZus{}similarity\PYZus{}score}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{neighbors} \PY{k}{import} \PY{n}{KNeighborsClassifier}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{Venues\PYZus{}df} \PY{o}{=} \PY{n}{Venues\PYZus{}dataset\PYZus{}2}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Latitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Longitude}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{Price\PYZus{}check} \PY{o}{=} \PY{n}{Venues\PYZus{}df}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Price\PYZus{}check}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Rating}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} Venue Price
+         1    132
+         2     60
+         3     16
+         4      2
+         Name: Venue Rating, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{Venues\PYZus{}df} \PY{o}{=} \PY{n}{Venues\PYZus{}df}\PY{p}{[}\PY{n}{Venues\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{!=} \PY{l+m+mi}{4}\PY{p}{]}
+         \PY{n}{data} \PY{o}{=} \PY{n}{Venues\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{target} \PY{o}{=} \PY{n}{Venues\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Venue Price}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:}  \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{neighbors} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{cv\PYZus{}scores\PYZus{}1} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{int}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{neighbors}\PY{p}{:}
+             \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+             \PY{n}{scores} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{pred} \PY{o}{=} \PY{n}{knn}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+             \PY{n}{jac} \PY{o}{=} \PY{n}{jaccard\PYZus{}similarity\PYZus{}score}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{pred}\PY{p}{)}
+             \PY{n}{cv\PYZus{}scores\PYZus{}1}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{jac}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{optimal\PYZus{}k\PYZus{}1} \PY{o}{=} \PY{n}{neighbors}\PY{p}{[}\PY{n}{cv\PYZus{}scores\PYZus{}1}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{max}\PY{p}{(}\PY{n}{cv\PYZus{}scores\PYZus{}1}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The optimal number of neighbors is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{optimal\PYZus{}k\PYZus{}1}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{neighbors}\PY{p}{,} \PY{n}{cv\PYZus{}scores\PYZus{}1}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Neighbors K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Jaccard Index}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The optimal number of neighbors is 3
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_43_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Notice that we have 3 peaks at k=3, k=13, k=14 which have the highest
+Jaccard index, so it isn't suffisant to depend on just this mesure.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{cv\PYZus{}scores\PYZus{}2} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{neighbors}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{n}{k} \PY{o}{\PYZlt{}} \PY{l+m+mi}{40}\PY{p}{)} \PY{p}{:}
+                 \PY{n}{knn} \PY{o}{=} \PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors}\PY{o}{=}\PY{n}{k}\PY{p}{)}
+                 \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{knn}\PY{p}{,} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{scoring}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{cv\PYZus{}scores\PYZus{}2}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{scores}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{MSE} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{x} \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{cv\PYZus{}scores\PYZus{}2}\PY{p}{]}
+         
+         \PY{n}{optimal\PYZus{}k\PYZus{}2} \PY{o}{=} \PY{n}{neighbors}\PY{p}{[}\PY{n}{MSE}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n+nb}{min}\PY{p}{(}\PY{n}{MSE}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The optimal number of neighbors is }\PY{l+s+si}{\PYZpc{}d}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{optimal\PYZus{}k\PYZus{}2}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{neighbors}\PY{p}{,} \PY{n}{MSE}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Neighbors K}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Misclassification Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+The optimal number of neighbors is 5
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Thus now we can be confident in saying that data can be clustered to 5
+classes just fine (and even if it is 3, and 5 had almost same
+Misclassification results we should take 5, as the labels depend on a
+strong variable which is Venue Price that takes 3 values, and we dont
+want our results to be biaised by a single feature)
+
+    \subsubsection{Conclusions}\label{conclusions}
+
+The biggest shortcoming of this project are pretty evident, unless a
+400\$ monthly subscription you have 500 premium calls per day to the
+Foursquare API, thus the dataset dimension is not impressive. Plus the
+definition of price range is pretty vague. Lastly Foursquare is not at
+all common in Morocco.
+
+The best source for data is to do web scrapping but that would take so
+much time.
+
+Hope you liked my notebook... Thanks for reading
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
